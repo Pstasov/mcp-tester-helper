@@ -1,0 +1,55 @@
+{
+  "name": "mcp-tester-helper",
+  "version": "1.0.0",
+  "description": "Unified MCP server for multi-stand infrastructure testing: REST APIs, PostgreSQL, and OpenSearch — all through a single config file.",
+  "license": "MIT",
+  "author": "Pstasov",
+  "type": "module",
+  "bin": {
+    "mcp-tester-helper": "./build/index.js"
+  },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc && node -e \"const fs=require('fs');const p=require('path');fs.cpSync(p.join('src','resources'),p.join('build','resources'),{recursive:true})\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "inspector": "npx @modelcontextprotocol/inspector build/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "axios": "^1.7.9",
+    "dotenv": "^17.4.2",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.24",
+    "@types/pg": "^8.20.0",
+    "typescript": "^5.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pstasov/mcp-tester-helper.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Pstasov/mcp-tester-helper/issues"
+  },
+  "homepage": "https://github.com/Pstasov/mcp-tester-helper#readme",
+  "keywords": [
+    "mcp",
+    "rest",
+    "api",
+    "postgres",
+    "opensearch",
+    "testing",
+    "devops",
+    "multi-stand",
+    "model-context-protocol"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

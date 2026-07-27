@@ -1,0 +1,60 @@
+{
+  "stands": {
+    "dev": {
+      "auth": {
+        "url": "https://auth.dev.example.com/oauth/token",
+        "type": "json",
+        "user": "DEV_USERNAME",
+        "pass": "DEV_PASSWORD"
+      },
+      "elastic": {
+        "url": "https://opensearch.dev.example.com:9200",
+        "user": "DEV_ELASTIC_USER",
+        "pass": "DEV_ELASTIC_PASS"
+      },
+      "database": {
+        "host": "db.dev.example.com",
+        "port": 5432,
+        "db": "dev_db",
+        "user": "DEV_DB_USER",
+        "pass": "DEV_DB_PASS"
+      },
+      "services": {
+        "billing": {
+          "url": "https://billing.dev.example.com/api",
+          "openapi": "api-docs/billing.json"
+        },
+        "users": {
+          "url": "https://users.dev.example.com/api",
+          "openapi": "api-docs/users.yaml"
+        }
+      }
+    },
+    "test": {
+      "auth": {
+        "url": "https://auth.test.example.com/oauth/token",
+        "type": "json",
+        "user": "TEST_USERNAME",
+        "pass": "TEST_PASSWORD"
+      },
+      "elastic": {
+        "url": "https://opensearch.test.example.com:9200",
+        "user": "TEST_ELASTIC_USER",
+        "pass": "TEST_ELASTIC_PASS"
+      },
+      "database": {
+        "host": "db.test.example.com",
+        "port": 5432,
+        "db": "test_db",
+        "user": "TEST_DB_USER",
+        "pass": "TEST_DB_PASS"
+      },
+      "services": {
+        "billing": {
+          "url": "https://billing.test.example.com/api",
+          "openapi": "api-docs/billing.json"
+        }
+      }
+    }
+  }
+}
