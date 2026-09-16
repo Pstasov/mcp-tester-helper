@@ -15,6 +15,7 @@ export interface ElasticConfig {
   url: string;
   user: string;  // env variable name
   pass: string;  // env variable name
+  indexPattern?: string;  // default index/index pattern for os_search and os_indices (e.g. "cluster-dslog-*")
 }
 
 export interface DatabaseConfig {

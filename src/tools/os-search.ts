@@ -39,11 +39,17 @@ async function osRequest(stand: string, method: string, path: string, body?: any
  */
 export async function osSearch(args: {
   stand: string;
-  index: string;
+  index?: string;
   query_body: any;
   fields?: string[];
 }): Promise<{ content: Array<{ type: string; text: string }>; isError?: boolean }> {
   try {
+    const standConfig = getStandConfig(args.stand);
+    const index = args.index || standConfig.elastic?.indexPattern;
+    if (!index) {
+      throw new Error(`'index' is required — stand '${args.stand}' has no default elastic.indexPattern configured.`);
+    }
+
     let queryBody = { ...args.query_body };
 
     // Inject _source filter if fields specified (from elastic MCP pattern)
@@ -56,7 +62,7 @@ export async function osSearch(args: {
     }
 
     const startTime = Date.now();
-    const response = await osRequest(args.stand, 'POST', `/${args.index}/_search`, queryBody);
+    const response = await osRequest(args.stand, 'POST', `/${index}/_search`, queryBody);
     const timing = Date.now() - startTime;
 
     if (response.status >= 400) {
@@ -115,7 +121,8 @@ export async function osIndices(args: {
   index_pattern?: string;
 }): Promise<{ content: Array<{ type: string; text: string }>; isError?: boolean }> {
   try {
-    const pattern = args.index_pattern || '*';
+    const standConfig = getStandConfig(args.stand);
+    const pattern = args.index_pattern || standConfig.elastic?.indexPattern || '*';
     const response = await osRequest(
       args.stand, 'GET',
       `/_cat/indices/${encodeURIComponent(pattern)}?format=json&h=index,status,docs.count,store.size`
@@ -199,11 +206,11 @@ export const osSearchSchema = {
     type: 'object' as const,
     properties: {
       stand: { type: 'string', description: 'Target stand (e.g. staging)' },
-      index: { type: 'string', description: 'Index name to search (e.g. "app-logs-*")' },
+      index: { type: 'string', description: 'Index name/pattern to search (e.g. "app-logs-*"). Optional if the stand config defines elastic.indexPattern — falls back to it.' },
       query_body: { type: 'object', description: 'Complete OpenSearch Query DSL body (query, size, from, sort, aggs, etc.)' },
       fields: { type: 'array', items: { type: 'string' }, description: 'Optional: fields to return in _source' },
     },
-    required: ['stand', 'index', 'query_body'],
+    required: ['stand', 'query_body'],
   },
 };
 
@@ -214,7 +221,7 @@ export const osIndicesSchema = {
     type: 'object' as const,
     properties: {
       stand: { type: 'string', description: 'Target stand (e.g. staging)' },
-      index_pattern: { type: 'string', description: 'Optional index pattern (e.g. "app-logs-*"). Default: "*"' },
+      index_pattern: { type: 'string', description: 'Optional index pattern (e.g. "app-logs-*"). Default: the stand config\'s elastic.indexPattern, or "*" if not set.' },
     },
     required: ['stand'],
   },

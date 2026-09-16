@@ -42,8 +42,14 @@ When the user asks to call a microservice:
 ## 3. OpenSearch / Log Search (Tools: `os_search`, `os_indices`, `os_mappings`)
 OpenSearch is part of each stand's infrastructure (the `elastic` section in config).
 
+### Default index pattern:
+If the stand's config sets `elastic.indexPattern`, it's used as the default index for
+`os_search` and `os_indices` — you can omit `index`/`index_pattern` entirely and query
+logs right away. Check `list_services` output for the configured `indexPattern` before
+falling back to discovery below.
+
 ### Preferred tools for log search:
-- `os_indices` — list available indices (start here to discover index names).
+- `os_indices` — list available indices (start here to discover index names, only if no `indexPattern` is configured).
 - `os_search` — search with full Query DSL (for complex queries with filters, aggregations).
 - `os_mappings` — inspect index field mappings before writing queries.
 

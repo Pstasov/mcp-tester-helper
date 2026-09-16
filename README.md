@@ -58,7 +58,8 @@ Add to your MCP client configuration (Claude Desktop, Antigravity, Cursor, etc.)
       "elastic": {
         "url": "https://opensearch.dev.example.com:9200",
         "user": "DEV_ELASTIC_USER",
-        "pass": "DEV_ELASTIC_PASS"
+        "pass": "DEV_ELASTIC_PASS",
+        "indexPattern": "dev-dslog-*"
       },
       "database": {
         "host": "db.dev.example.com",
@@ -130,7 +131,8 @@ Execute read-only SQL queries with connection pooling.
 
 ### `os_search` — OpenSearch Query DSL
 
-Search OpenSearch indices using the full Query DSL.
+Search OpenSearch indices using the full Query DSL. `index` is optional if the stand's
+`elastic.indexPattern` is configured — it's used as the default.
 
 ```json
 {

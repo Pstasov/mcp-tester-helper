@@ -25,7 +25,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const SERVER_NAME = 'mcp-tester-helper';
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 // ── Initialize config ──────────────────────────────────────────────────────────
 

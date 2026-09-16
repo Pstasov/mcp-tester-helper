@@ -69,6 +69,11 @@
 }
 ```
 
+### Omitting `index` (uses the stand's configured `elastic.indexPattern`)
+```json
+{ "stand": "staging", "query_body": { "query": { "match_all": {} }, "size": 5 } }
+```
+
 ---
 
 ## os_indices — List OpenSearch Indices

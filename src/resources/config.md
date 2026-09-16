@@ -17,7 +17,8 @@ The config file defines your stands (environments) and their infrastructure:
       "elastic": {
         "url": "https://opensearch.example.com:9200",
         "user": "ENV_VAR_NAME",
-        "pass": "ENV_VAR_NAME"
+        "pass": "ENV_VAR_NAME",
+        "indexPattern": "my-app-dslog-*"
       },
       "database": {
         "host": "db.example.com",
@@ -42,6 +43,13 @@ The config file defines your stands (environments) and their infrastructure:
 
 - `"json"` (default): Sends `{ "username": "...", "password": "..." }` as JSON body
 - `"oauth2"`: Sends `grant_type=password&username=...&password=...` as form-urlencoded
+
+### Elastic Index Pattern
+
+`elastic.indexPattern` is optional. When set, it becomes the default index/pattern for
+`os_search` (its `index` argument becomes optional) and `os_indices` (its `index_pattern`
+argument becomes optional). This lets the agent search logs immediately without first
+calling `os_indices` to guess the naming scheme.
 
 ### Credential Resolution
 

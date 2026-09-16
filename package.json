@@ -1,12 +1,12 @@
 {
   "name": "mcp-tester-helper",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Unified MCP server for multi-stand infrastructure testing: REST APIs, PostgreSQL, and OpenSearch — all through a single config file.",
   "license": "MIT",
   "author": "Pstasov",
   "type": "module",
   "bin": {
-    "mcp-tester-helper": "./build/index.js"
+    "mcp-tester-helper": "build/index.js"
   },
   "files": [
     "build",
@@ -32,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Pstasov/mcp-tester-helper.git"
+    "url": "git+https://github.com/Pstasov/mcp-tester-helper.git"
   },
   "bugs": {
     "url": "https://github.com/Pstasov/mcp-tester-helper/issues"

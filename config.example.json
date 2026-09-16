@@ -10,7 +10,8 @@
       "elastic": {
         "url": "https://opensearch.dev.example.com:9200",
         "user": "DEV_ELASTIC_USER",
-        "pass": "DEV_ELASTIC_PASS"
+        "pass": "DEV_ELASTIC_PASS",
+        "indexPattern": "dev-dslog-*"
       },
       "database": {
         "host": "db.dev.example.com",

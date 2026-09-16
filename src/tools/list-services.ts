@@ -25,7 +25,7 @@ export async function listServices(args: {
         url: svc.url,
         openapi: svc.openapi || null,
       })),
-      elastic: standConfig.elastic ? { url: standConfig.elastic.url } : null,
+      elastic: standConfig.elastic ? { url: standConfig.elastic.url, indexPattern: standConfig.elastic.indexPattern || null } : null,
       database: standConfig.database ? {
         host: standConfig.database.host,
         port: standConfig.database.port,
